@@ -142,7 +142,7 @@ get "/t/:slug/?" do
   pp params["slug"]
 end
 
-get "/:slug/?" do 
+get "/item/:slug/?" do 
   pp params["slug"]
   @item = ($items.map {|k,v| if v["slug"] == params["slug"] then v else nil end } - [nil])[0]
   pass unless @item
