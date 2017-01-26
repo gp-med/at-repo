@@ -1,0 +1,158 @@
+-# coding: utf-8
+!!!
+-@simage = @slug ? "#{$siteurl}/img/#{@code}.jpg" : "#{$siteurl}/img/S.jpg"
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
+    %title= $title
+
+    / HTML meta tags
+    %meta{:content => @slug ? @title : $title, :name => "title"}/
+    %meta{:content => $description, :name => "description"}/
+    %meta{:content => $site_tags, :name => "keywords"}/
+    %meta{:content => "", :name => "author"}/
+
+    / Facebook meta tags
+    %meta{:content => @slug ? @title : $title, :property => "og:title"}/
+    %meta{:content => "website", :property => "og:type"}/
+    %meta{:content => $description, :property => "og:description"}/
+    %meta{:content => @slug ? "#{$siteurl}/#{@slug}" : $siteurl, :property => "og:url"}/
+    %meta{:content => @simage, :property => "og:image"}/
+    %meta{:content => $title, :property => "og:site_name"}/
+
+    / Twitter meta tags
+    %meta{:content => "summary_large_image", :property => "twitter:card"}/
+    %meta{:content => "@adoganvakfi", :property => "twitter:site"}/
+    -#%meta{:content => "@jameshardrock", :name => "twitter:creator"}/
+
+    %link{:href => "/css/main.css?#{rand(1024)}", :rel => "stylesheet"}/
+    %link{:rel=>"apple-touch-icon-precomposed",:href=>"/img/apple-touch-icon-152x152-precomposed.png"}
+
+    :css
+      body { margin:24px; }
+      span.mani {color: #666; font-size: 16px;}
+      td.img, td.img img {
+        width:200px;
+        height:150px;
+      }
+      td.info {
+        position:relative;
+      }
+      .tags {font-style: italic; margin-top:28px;}
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  %body
+    %a{:href=>"/"} Back to list
+    .clearfix
+      .pull-right
+        %p.tags
+          %strong
+            =@item["category"]
+          -@item["tags"].each do |tag|
+            %span
+              =tag
+        %p.lead.pull-right
+          %strong= @item["cost_range"]
+
+      %h2
+        = @item["name"]
+        %span.mani= "by #{@item["manufacturer"]}"
+      %h4.lead= @item["headline"]
+      ~ @item["description"]
+    -if @item["images"] and @item["images"].any?
+      #carousel_container{:style=>'display:none'}
+        #left_scroll
+          %i.fa.fa-chevron-left
+        #carousel_inner
+          %ul#carousel_ul
+            -@item["images"].each do |image|
+              %li
+                %a{:href=>"/img/items/#{@item["id"]}/#{image}",:target=>'_blank'}
+                  %img{:src=>"/img/items/#{@item["id"]}/t#{image}",:style=>'height:150px;width:auto;display:none;'}
+        #right_scroll
+          %i.fa.fa-chevron-right
+
+    %p
+      %strong Specifications
+    ~ @item["tech_specs"]
+
+    :javascript
+      var $content = #{$items.to_json}
+      var $tweettext = "#{$tweettext}"
+
+    %script{:src => "/js/main.js?#{rand(1024)}", :type=>"text/javascript"}
+
+    :javascript
+      $(function() {
+        function imageLoaded() {
+          counter--; 
+          if( counter === 0 ) {
+            if ($('#carousel_ul li img').length == $('#carousel_ul li img.error').length) {
+              console.log('err');
+            } else {
+              $('#carousel_ul li img').show();
+              $('#carousel_container').slideDown('400',function(){setModalHeight();});
+            }
+            crsgap = 6;
+            crswidth = 0
+            $('#carousel_ul li').each(function(i,v){
+              crswidth += $(this).width();
+              crswidth += crsgap;
+            })
+            wdiff = $('#carousel_container').width() - crswidth;
+            if (wdiff >= 0){
+              $('#carousel_ul').css('left','0px')
+              $('#left_scroll').hide();
+              $('#right_scroll').hide();
+            } else {
+              $('#carousel_ul li:first').before($('#carousel_ul li:last'));
+              var item_width = $('#carousel_ul li:first').width() + crsgap; 
+              $('#carousel_ul').css({'left' : String(item_width * -1) + 'px'});
+            }
+            $('#right_scroll').click(function(){
+              var item_width = $('#carousel_ul li:eq(1)').width() + crsgap;
+              var left_indent = parseInt($('#carousel_ul').css('left')) - item_width;
+              $('#carousel_ul').animate({'left' : left_indent},{queue:false, duration:500, complete: function(){
+                $('#carousel_ul li:last').after($('#carousel_ul li:first'));
+                var item_width = $('#carousel_ul li:first').width() + crsgap;
+                $('#carousel_ul').css({'left' : String(item_width * -1) + 'px'});
+              }});
+            });
+            $('#left_scroll').click(function(){
+              $('#carousel_ul li:first').before($('#carousel_ul li:last'));
+              var item_width = $('#carousel_ul li:eq(1)').width() + $('#carousel_ul li:first').width() + crsgap * 2;
+              $('#carousel_ul').css({'left' : String(item_width * -1) + 'px'});
+              var item_width = $('#carousel_ul li:eq(1)').width()  + crsgap;
+              var left_indent = parseInt($('#carousel_ul').css('left')) + item_width;
+              $('#carousel_ul').animate({'left' : left_indent},{queue:false, duration:500});
+            });
+            $('#carousel_ul li').mouseenter(function(){
+              $(this).find('.title').show();
+              $(this).find('.url').show();
+            });
+            $('#carousel_ul li').mouseleave(function(){
+              $(this).find('.title').hide();
+              $(this).find('.url').hide();
+            });
+          }
+        }
+        var images = $('img');
+        var counter = images.length;  // initialize the counter
+
+                  images.each(function() {
+                    if( this.complete ) {
+                      imageLoaded.call( this );
+                    } else {
+                      $(this).one('load', imageLoaded);
+                    }
+                  });
+                  images.error(function(){
+                    imageLoaded();
+                    $(this).addClass('error');
+                  });
+                });

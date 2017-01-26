@@ -1,0 +1,73 @@
+id,name,slug,category,tags,headline,description,tech_specs,cost_range,delivery,notes,manufacturer,links,images
+1,Infinity 9,infinity-9,uav,"aerial, investigation, vehicle, rotor, octocopter",Flying thing that does other things,"Engineered to effortlessly carry extraordinary payloads with exceptional stability, the Infinity 9Pro octocopter is a newly upgraded version of the Inifinity 9 by Turbo Ace. Establishing a new class of Super Lift octocopters, this modern marvel is capable of carrying over 20 lbs of payload, about a 50% increase over current Heavy Lift models. Instead of just carrying a barebone Red Epic on leading AllSteady-7 or Ronin 3-Axis Brushless Gimbals, the Infinity 9 can easily sustain heavier lenses and battery options without impacting video quality. In contrast to weak joints and hinges of typical down folding booms on smaller octocopters, the majestic Infinity 9Pro is forged from quadruple carbon decks and aircraft aluminum mechanism for twice the strength and rigidity to stop vibrations or oscillations under large payloads. A generous 5.5 feet wingspan is powered by cutting edge Tiger Motor U7 brushless motors and matching ultra stiff 17 inch carbon fiber propellers with super-strength bolsa core integration to generate unrivaled capacity and performance. As a world class developer and distributor of helicopter and multicopters, Turbo Ace offers cutting edge technology with an outstanding track record in meticulous integration and testing, on-time delivery and continued support. Fully assembled turnkey Infinity 9Pro package includes an optional integration of 3-axis brushless gimbals, GPS functions, long range pilot/cameraman transmitters and FPV live video feed. In contrast to most octocopters which are disassembled and delivered in pieces, the Infinity 9Pro structure is designed to fold and unfold within minutes for shipping and remote field operations. Convenient parts and upgrades support is available from our 32,000 square feet facility in California.","Triple Carbon Fiber Decks & CNC Aluminum Architecture
+Super Rigid 5½ Feet Wingspan for smooth effortless motion & stability
+Patent Pending Foldable Carbon Fiber Booms with Lockable Aluminum Gliders on Carbon Tracks
+Long Range 2.4GHz Transmitters, Receivers & Telemetry for up to 1.5 miles operations
+Telemetry Set Up includes secondary alarm for low battery status warning
+Advanced DJI A2 Flight Controller & GPS Functions
+Triple Bearing 48mm Brushless Motors for extraordinary precision, torque & durability
+60A SimonK ESCs with customized algorithms for smoother & cooler operations 
+17 Inch Ultra Stiff Carbon Fiber Double-Point Mount Propellers with Bolsa Core Technology 
+Retractable Landing Skid with Easy Release Track System
+Advanced Brushless 3-Axis AllSteady 6 or Ronin (not shown on picture) for DSLR & Red Epic Cameras
+Vibration Isolation to prevent jello associated with rolling shutters
+Live Video Feed Transmitter, Receivers & Monitors/Goggles
+OSD to Display In-flight Data & Artificial Horizon overlaid on top of Live Video Feed
+Qty2 x 16,000mah 6S LiPo Battery or Qty2 x 22,000mah 6S LiPo for extended flight time
+SkyRC Ultra Fast Battery Charger or SkyRC 4-Simultaneous Batteries Charger
+Waypoint Components for preprogrammed flights.
+Options for Training include smaller crash resistant quadcopter & flight simulators
+Flash Memory with individual test flight video and comprehensive User Instruction Manual",15000~25000,~2 weeks,see legal restrictions per country,Turbo Ace,http://www.turboace.com/infinity-9pro_octocopter.aspx,"http://www.turboace.com/images/part_3batteries_4layers.jpg
+http://www.turboace.com/images/part_3_2.jpg"
+2,HackRF,hack-rf,radio,"sdr, rf",Half duplex digital xceiver,"HackRF One from Great Scott Gadgets is a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. Designed to enable test and development of modern and next generation radio technologies, HackRF One is an open source hardware platform that can be used as a USB peripheral or programmed for stand-alone operation.","1 MHz to 6 GHz operating frequency
+half-duplex transceiver
+up to 20 million samples per second
+8-bit quadrature samples (8-bit I and 8-bit Q)
+compatible with GNU Radio, SDR#, and more
+software-configurable RX and TX gain and baseband filter
+software-controlled antenna port power (50 mA at 3.3 V)
+SMA female antenna connector
+SMA female clock input and output for synchronization
+convenient buttons for programming
+internal pin headers for expansion
+Hi-Speed USB 2.0
+USB-powered
+open source hardware",~300,instant,see legal restrictions,Great Scott Gadgets,http://greatscottgadgets.com/hackrf/,http://greatscottgadgets.com/images/h1-preliminary1-445.jpeg
+3,Sprite,sprite,uav,"aerial, investigation, vehicle",Portable and rugged. A totally different drone.,"Sprite is a completely different kind of unmanned aerial vehicle. Portable, rugged, powerful, and easy to use. A tool, not a toy.","Enclosed, compact, rugged and water resistant airframe
+Well-proven, fully autonomous autopilot with GPS and inflight telemetry
+Wide range of sophisticated autonomous flight modes including waypoint navigation and “follow me”
+1080P high-definition video with 2-axis stabilized gimbal
+Push-button interface lets you leave your tablet computer or RC radio at home
+Range of up to 4 miles (more than 6km), depending on mission, equipment and environment
+FPV (First-Person-View) ready
+GoPro™ compatible 2-axis stabilized gimbal (pitch and roll) NOW STANDARD!
+Close-proximity obstacle-avoidance technology for operations in confined areas
+High-intensity LED light band for visibility and night operations
+Emergency services and disaster recovery
+Search and rescue
+Security and law enforcement
+Environmental management and conservation
+Urban planning and engineering
+Offshore and overwater inspection",not disclosed,starting Aug 2017,"",Ascent AeroSystems,https://www.kickstarter.com/projects/ascentaerosystems/sprite-the-portable-rugged-totally-different-small,https://ksr-ugc.imgix.net/assets/013/315/644/3e673c0d653d869995c058adaa9e1031_original.PNG?w=700&fit=max&v=1470705338&auto=format&q=92&s=8391bf8c76d22d64f92f1ec706e601a4
+4,PicoLAR,pico-lar,tracking,"satellite, tracking, rfid, lo-co","PicoLAR enables you to remotely track & trace a variety of objects, e.g. cars, trucks, containers, (motor)cycles, lawnmowers, boats, people etc.","The Streamline Compact LAR is equipped with a Nordic 2,4Ghz active RFID module. A range up to 50 meters can be reached with the standard module. Optional (OEM only), we can produce a module with an extended range of up to 2000 meters. The active RFID can be switched on as desired and can also be used to as a beacon for other modules.","Quad-band GSM for worldwide coverage.
+Ultra low power consumption.
+5 to 31VDC power supply.
+Serial, analog and digital interfaces.
+RFID, 2,4Ghz Nordic Technology
+Excellent GPS accuracy 
+GSM/GPS antenna on-board
+150mA output, 2 inputs (eg. for contact switch / private business)
+1-Wire connection for dual ibutton reader
+3D acceleration / crash / gravity sensor for accident recording or motion detection
+Small, PCB is only 91 x 40 x 9 mm.
+Lightweight: 22 grams for the PCB, 14 grams for a 670mAh battery if needed.
+Wide operating temperature range.
+Multiple watchdog levels for maximum stability .
+Dual charge protection for voltages and temperature range.
+Remote configurable to fit any job (both firmware and configuration files can be updated over the air)
+Configuration can be both Server and Event driven, 300+ different events, over 4000 geozones
+Runs local user scripts via .src files
+Field upgradeable firmware via GPRS
+Supports multi server configuration
+User definable SMS commands
+Designed to be used in industrial objects",~40,instant,"",Streamline,http://shop.yourstreamline.com/index.php/streamline-pico-lar.html,""

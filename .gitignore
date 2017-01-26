@@ -1,0 +1,16 @@
+.DS_Store
+.rvmrc
+log/**/*
+tmp/**/*
+tmp/*
+lib/secret.rb
+lib/stored_token.json
+public/img/items/*
+public/item/*
+*.swp
+*.swo
+*.swn
+*.swm
+.~*
+Gemfile.lock
+
