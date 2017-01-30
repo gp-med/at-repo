@@ -7,6 +7,8 @@ lib/secret.rb
 lib/stored_token.json
 public/img/items/*
 public/item/*
+public/c/*
+public/t/*
 *.swp
 *.swo
 *.swn

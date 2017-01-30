@@ -1,98 +1,27 @@
--# coding: utf-8
-!!!
--@simage = @slug ? "#{$siteurl}/img/#{@code}.jpg" : "#{$siteurl}/img/S.jpg"
-%html{:lang => "en"}
-  %head
-    %meta{:charset => "utf-8"}/
-    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
-    %title= $title
 
-    / HTML meta tags
-    %meta{:content => @slug ? @title : $title, :name => "title"}/
-    %meta{:content => $description, :name => "description"}/
-    %meta{:content => $site_tags, :name => "keywords"}/
-    %meta{:content => "", :name => "author"}/
+%table
+  %tbody
+    -@items.each do |item|
+      -id = item["id"]
+      %tr
+        %td.img
+          %a{:href=>"/item/#{item["slug"]}"}
+            -if item["images"] and item["images"].any?
+              %img{:src=>"/img/items/#{id}/t#{item["images"][0]}"}
+            -else
+              %img{:src=>"/img/noway.png"}
+        %td.info
+          %h4
+            %a{:href=>"/item/#{item["slug"]}"}
+              %strong= item["name"]
+          %p= item["headline"]
+          %p.tags
+            %strong
+              %a{:href=>"/c/#{item["category"]}"}
+                =item["category"]
+            -item["tags"].each do |tag|
+              %span
+                %a{:href=>"/t/#{tag}"}
+                  =tag
 
-    / Facebook meta tags
-    %meta{:content => @slug ? @title : $title, :property => "og:title"}/
-    %meta{:content => "website", :property => "og:type"}/
-    %meta{:content => $description, :property => "og:description"}/
-    %meta{:content => @slug ? "#{$siteurl}/#{@slug}" : $siteurl, :property => "og:url"}/
-    %meta{:content => @simage, :property => "og:image"}/
-    %meta{:content => $title, :property => "og:site_name"}/
-
-    / Twitter meta tags
-    %meta{:content => "summary_large_image", :property => "twitter:card"}/
-    %meta{:content => "@adoganvakfi", :property => "twitter:site"}/
-    -#%meta{:content => "@jameshardrock", :name => "twitter:creator"}/
-
-    %link{:href => "/css/main.css?#{rand(1024)}", :rel => "stylesheet"}/
-    %link{:rel=>"apple-touch-icon-precomposed",:href=>"/img/apple-touch-icon-152x152-precomposed.png"}
-
-    :css
-      body { margin:24px; }
-      tr { border: 12px solid transparent;}
-      tr:hover { background-color: #efefef;}
-      td.img, td.img img {
-        width:200px;
-        height:150px;
-      }
-      .tags {font-style: italic;}
-      td.info { position:relative; width:100%;}
-      td.info h4 { position:absolute; top:0; left: 12px; right:12px;}
-      td.info p  { position:absolute; top: 32px; left: 12px; right:12px;}
-      td.info p.tags  { bottom: -12px; top: auto;}
-
-
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-  %body
-    %table
-      %tbody
-        -$items.each do |id, item|
-          %tr
-            %td.img
-              %a{:href=>"/item/#{item["slug"]}"}
-                -if item["images"] and item["images"].any?
-                  %img{:src=>"/img/items/#{id}/t#{item["images"][0]}"}
-                -else
-                  %img{:src=>"/img/noway.png"}
-            %td.info
-              %h4
-                %a{:href=>"/item/#{item["slug"]}"}
-                  %strong= item["name"]
-              %p= item["headline"]
-              %p= item["headline"]
-              %p.tags
-                %strong
-                  =item["category"]
-                -item["tags"].each do |tag|
-                  %span
-                    =tag
-
-
-    :javascript
-      var $content = #{$items.to_json}
-      var $tweettext = "#{$tweettext}"
-
-    %script{:src => "/js/main.js?#{rand(1024)}", :type=>"text/javascript"}
-
-    :javascript
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-49025282-5', 'auto');
-      ga('send', 'pageview');
-
-    :javascript
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-49025282-5', 'auto');
-      ga('send', 'pageview');
 

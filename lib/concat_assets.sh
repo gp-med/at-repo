@@ -1,6 +1,6 @@
 #!/bin/bash          
 cd assets/js/
-cat jquery.js modal.js dropdown.js d3.v3.js d3.tip.js retina-1.1.0.min.js app.js > all.js
+cat jquery.js modal.js dropdown.js d3.v3.js d3.tip.js app.js > all.js
 java -jar ../../yui.jar --type js all.js > ../../../public/js/main.js
 
 cd ../css/less/

@@ -13,6 +13,7 @@ require 'pp'
 
 require "#{Dir.pwd}/lib/secret.rb"
 
+
 def fetch_content
   require "google_drive"
   session = GoogleDrive.saved_session("#{Dir.pwd}/lib/stored_token.json", nil, $api_id, $api_key)
@@ -47,7 +48,7 @@ def parse_content dlimg=false
     id = 0
     row.each_with_index do |c,i|
       if i == 0
-        id = c
+        id = c.to_i
         item["id"] = id
       elsif [6,7,10].include?(i)
         item[header[i]] = markdown.render(c.gsub("\n","\n\n")).gsub(/\n+/,"\n")
@@ -56,18 +57,18 @@ def parse_content dlimg=false
       elsif i == 3
         item[header[i]] = c
         if $cats.has_key?(c)
-          $cats[c] << ind
+          $cats[c] << id
         else
-          $cats[c] = [ind]
+          $cats[c] = [id]
         end
       elsif i == 4
         c = c.strip.split(/\s*,\s*/)
         item[header[i]] = c
         c.each do |t|
           if $tags.has_key?(t)
-            $tags[t] << ind
+            $tags[t] << id
           else
-            $tags[t] = [ind]
+            $tags[t] = [id]
           end
         end
       elsif i == 12
@@ -110,13 +111,27 @@ def parse_content dlimg=false
     $items[id] = item
   end
 
-  html = Tilt.new("#{Dir.pwd}/views/index.haml").render(self)
+  html = Haml::Engine.new(IO.read("#{Dir.pwd}/views/index.haml")).render(self, :@items=>$items.values)
   File.open("#{Dir.pwd}/public/index.html","w") {|f| f << html}
   File.open("#{Dir.pwd}/lib/assets/sample.html","w") {|f| f << html}
 
+  $cats.each do |k,v|
+    html = Haml::Engine.new(IO.read("#{Dir.pwd}/views/index.haml")).render(self, :@items=>$items.values_at(*v))
+    Dir.mkdir("#{Dir.pwd}/public/c/#{k}") unless Dir.exist?("#{Dir.pwd}/public/c/#{k}")
+    File.open("#{Dir.pwd}/public/c/#{k}/index.html","w") {|f| f << html}
+    File.open("#{Dir.pwd}/lib/assets/sample.html","a") {|f| f << html}
+  end
+
+  $tags.each do |k,v|
+    html = Haml::Engine.new(IO.read("#{Dir.pwd}/views/index.haml")).render(self, :@items=>$items.values_at(*v))
+    Dir.mkdir("#{Dir.pwd}/public/t/#{k}") unless Dir.exist?("#{Dir.pwd}/public/t/#{k}")
+    File.open("#{Dir.pwd}/public/t/#{k}/index.html","w") {|f| f << html}
+    File.open("#{Dir.pwd}/lib/assets/sample.html","a") {|f| f << html}
+  end
+
   $items.each do |k,v|
-    @item = v
-    html = Tilt.new("#{Dir.pwd}/views/page.haml").render(self)
+    item = v
+    html = Haml::Engine.new(IO.read("#{Dir.pwd}/views/page.haml")).render(self, :@item=>item)
     Dir.mkdir("#{Dir.pwd}/public/item/#{v["slug"]}") unless Dir.exist?("#{Dir.pwd}/public/item/#{v["slug"]}")
     File.open("#{Dir.pwd}/public/item/#{v["slug"]}/index.html","w") {|f| f << html}
     File.open("#{Dir.pwd}/lib/assets/sample.html","a") {|f| f << html}
@@ -128,18 +143,27 @@ def parse_content dlimg=false
 end
 
 get "/?" do 
+  @items = $items.values
   index = haml :index
-  File.open("#{Dir.pwd}/public/index.html","w") {|f| f << index}
   return index
 end
 
 get "/c/:slug/?" do 
-  pp params["slug"]
   @slug = params["slug"]
+  ids = $cats[@slug]
+  pass unless ids
+  @items = $items.values_at(*ids)
+  index = haml :index
+  return index
 end
 
 get "/t/:slug/?" do 
-  pp params["slug"]
+  @slug = params["slug"]
+  ids = $tags[@slug]
+  pass unless ids
+  @items = $items.values_at(*ids)
+  index = haml :index
+  return index
 end
 
 get "/item/:slug/?" do 
